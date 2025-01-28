@@ -2,11 +2,13 @@
 #define ULLISTSTR_H
 #include <string>
 
+using namespace std;
+
 #define ARRSIZE 10
 class ULListStr {
  public:
   struct Item {
-    std::string val[ARRSIZE];
+    string val[ARRSIZE];
     /**
      * first and last indicate the occupied/used 
      * elements of the array where first is an
@@ -55,7 +57,7 @@ class ULListStr {
    * Adds a new value to the back of the list
    *   - MUST RUN in O(1)
    */
-  void push_back(const std::string& val);
+  void push_back(const string& val);
 
   /**
    * Removes a value from the back of the list
@@ -70,7 +72,7 @@ class ULListStr {
    * allocate a new head node.
    *   - MUST RUN in O(1)
    */
-  void push_front(const std::string& val);
+  void push_front(const string& val);
 
   /**
    * Removes a value from the front of the list
@@ -82,31 +84,31 @@ class ULListStr {
    * Returns a const reference to the back element
    *   - MUST RUN in O(1)
    */
-  std::string const & back() const;
+  string const & back() const;
 
   /**
    * Returns a const reference to the front element
    *   - MUST RUN in O(1)
    */
-  std::string const & front() const;
+  string const & front() const;
   
   /**
    * Overwrites the old value at index, pos, with val
    *   - Can run in O(n)
    */
-  void set(size_t pos, const std::string& val);
+  void set(size_t pos, const string& val);
 
   /**
    * Returns the value at index, pos
    *   - Can run in O(n)
    */
-  std::string& get(size_t pos);
+  string& get(size_t pos);
 
   /**
    * Returns the value at index, pos
    *   - Can run in O(n)
    */
-  std::string const & get(size_t pos) const;
+  string const & get(size_t pos) const;
 
   /**
    * Deletes all items in the list
@@ -119,7 +121,9 @@ class ULListStr {
    *  if loc is valid and NULL otherwise
    *   - MUST RUN in O(n) 
    */
-  std::string* getValAtLoc(size_t loc) const;
+  string* getValAtLoc(size_t loc) const;
+
+  
 
 
   /**
