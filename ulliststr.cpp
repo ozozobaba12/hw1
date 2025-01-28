@@ -67,53 +67,79 @@ void ULListStr::clear()
 }
 
 void ULListStr::push_back(const string& val){
-  if (!tail_||tail_->last==ARRSIZE){
-    Item* newItem=new Item();
-    if(tail_!=nullptr){
-      tail_->next=newItem;
-      newItem->prev=tail_;
-    }
-    tail_=newItem;
-    if (head_==nullptr){
-      head_=tail_;
-    }
-  }
+  if(tail_==nullptr){
+  Item* newItem = new Item();
+  newItem->val[0]=val;
+  newItem->first=0;
+  newItem->last=1;
+  head_=newItem;
+  tail_=newItem;
+
+}
+
+else if (tail_->last==ARRSIZE){
+  Item* newItem = new Item();
+  newItem->val[0]=val;
+  newItem->first=0;
+  newItem->last=1;
+  newItem->prev=tail_;
+  tail_->next=newItem;
+  tail_=newItem;
+}
+
+else {
   tail_->val[tail_->last]=val;
   tail_->last++;
-  size_++;
+  
+}
+
+size_++;
+
 }
 
 void ULListStr::push_front(const string& val){
-if (!head_||head_->first==0){
-  Item* newItem=new Item();
-  if (head_!=nullptr){
-    head_->prev=newItem;
-    newItem->next=head_;
-  }
+if(head_==nullptr){
+  Item* newItem = new Item();
+  newItem->val[ARRSIZE-1]=val;
+  newItem->first=ARRSIZE-1;
+  newItem->last=ARRSIZE;
   head_=newItem;
-  if(tail_==nullptr){
-    tail_=head_;
-  }
+  tail_=newItem;
+
 }
-  
+
+else if (head_->first==0){
+  Item* newItem = new Item();
+  newItem->val[ARRSIZE-1]=val;
+  newItem->first=ARRSIZE-1;
+  newItem->last=ARRSIZE;
+  newItem->next=head_;
+  head_->prev=newItem;
+  head_=newItem;
+}
+
+else {
   head_->first--;
   head_->val[head_->first]=val;
-  size_++;
+}
+
+size_++;
+
 }
 
 void ULListStr::pop_back(){
-  if (!tail_){
+  if (empty()){
     return;
   }
 
   tail_->last--;
-  size_--;
+ 
 
   if(tail_->first==tail_->last){
     Item* temp=tail_;
     tail_=tail_->prev;
 
-    if (tail_){
+    if (tail_!=nullptr){
       tail_->next=nullptr;
     }
 
@@ -123,22 +149,23 @@ void ULListStr::pop_back(){
 
     delete temp;
   }
-  
+
+  size_--;
 }
 
 void ULListStr::pop_front(){
-  if(!head_){
+  if(empty()){
     return;
   }
 
   head_->first++;
-  size_--;
+  
 
   if (head_->first==head_->last){
     Item* temp=head_;
     head_=head_->next;
 
-    if (head_){
+    if (head_!=nullptr){
       head_->prev=nullptr;
     }
 
@@ -148,22 +175,19 @@ void ULListStr::pop_front(){
 
     delete temp;
   }
+  size_--;
 }
 
 string const & ULListStr::back() const{
-  if(!tail_){
-     throw out_of_range("empty list");
-  }
-
+  if(!empty()){
   return tail_->val[tail_->last-1];
+}
 }
 
 string const & ULListStr::front() const{
-  if (!head_){
-    throw out_of_range("empty list");
+  if (!empty()){
+    return head_->val[head_->first];
   }
-
-  return head_->val[head_->first];
 }
 
 

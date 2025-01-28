@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
    for (size_t i=0; i<testList.size(); i++ ){
     cout<<i<<": " <<testList.get(i)<<endl;
   }
-
+  // cout << "29" << endl;
   testList.pop_back();
   for (size_t i=0; i<testList.size(); i++ ){
     cout<<i<<": " <<testList.get(i)<<endl;
